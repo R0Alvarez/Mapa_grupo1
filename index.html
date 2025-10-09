@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animales del Fin del Mundo</title>
+
+  <!-- Vincula tu CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Librería Leaflet para el mapa -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+  <!-- 🌌 Sección principal con fondo y título -->
+  <section class="hero">
+    <h1 class="title">Animales del Fin del Mundo</h1>
+    <button id="scrollButton">Explorar</button>
+
+  </section>
+
+  <!-- 🗺️ Sección del mapa -->
+  <section id="map-section">
+    <div id="map"></div>
+  </section>
+
+  <!-- 📜 Tarjeta flotante con info de animales -->
+  <div id="animal-card" class="hidden">
+    <img id="animal-image" src="" alt="">
+    <h2 id="animal-common"></h2>
+    <p id="animal-scientific"></p>
+    <p id="animal-description"></p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Script opcional: scroll suave al mapa -->
+  <script>
+  const scrollButton = document.getElementById("scrollButton");
+const mapSection = document.getElementById("map-section");
+
+scrollButton.addEventListener("click", () => {
+  mapSection.scrollIntoView({ behavior: "smooth" });
+});
+
+  </script>
+
+</body>
+</html>

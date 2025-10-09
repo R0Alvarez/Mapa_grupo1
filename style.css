@@ -1,0 +1,260 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #0b1e16;
+    color: #e2e8cf;
+    overflow-x: hidden;
+  }
+  
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #0b1e16, #123524);
+  }
+  
+  .title {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease;
+  }
+
+  #scrollButton {
+    background-color: #25593c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #scrollButton:hover {
+    background-color: #377958;
+  }
+  
+  #map {
+    height: 100vh;
+    width: 100%;
+    position: relative; /* necesario si quieres que los hijos absolutos se posicionen relativo al body */
+  }
+  
+  #animal-card {
+    position: absolute; /* antes estaba fixed o top-right */
+    background-color: rgba(15, 35, 25, 0.95);
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    padding: 15px;
+    width: 280px;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;  /* <<< Esto hace que esté sobre el mapa */
+  }
+  
+  #animal-card.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+
+  
+  #animal-card.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+
+  
+  #animal-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* === Fondo elegante para la sección principal === */
+.hero {
+  position: relative;
+  height: 100vh; /* Ocupa toda la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Fondo oscuro con puntitos y degradado */
+  background-color: #000;
+  background-image:
+    radial-gradient(circle at 25% 25%, #1a1a1a 0.5px, transparent 1px),
+    radial-gradient(circle at 75% 75%, #0f0f0f 0.5px, transparent 1px),
+    radial-gradient(125% 125% at 50% 10%, #000000 40%, #072607 100%);
+  background-size: 10px 10px, 10px 10px, auto;
+  image-rendering: pixelated;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+#scrollButton {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#scrollButton:hover {
+  background: #22c55e;
+  transform: scale(1.05);
+}
+
+/* -------------------------
+  Fondo tipo puntitos + degradado circular para la sección del mapa
+   (reemplaza cualquier regla anterior para #map-section / #map)
+   Pegar al final de style.css
+   ------------------------ */
+   #map-section {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: transparent; /* dejar transparente para que el pseudo muestre */
+  }
+  
+  /* pseudo-fondo con puntitos + degradado circular (detrás del mapa) */
+  #map-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  
+    /* Color base oscuro similar al final de la portada */
+    background-color: #05160598;
+  
+    /* Capas del patrón + degradado que conecta con la primera parte */
+    background-image:
+      radial-gradient(circle at 25% 25%, #1e1e1e 0.4px, transparent 1px),
+      radial-gradient(circle at 75% 75%, #141414 0.4px, transparent 1px),
+      radial-gradient(circle at 50% 50%, rgba(140, 140, 140, 0.25) 0%, rgba(13, 13, 13, 0.1) 65%, rgba(4, 26, 4, 1) 100%);
+    
+    background-size: 12px 12px, 12px 12px, 800px 800px;
+    background-repeat: repeat, repeat, no-repeat;
+    background-position: center center;
+    image-rendering: pixelated;
+    
+    /* Difumina la parte inferior */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+  
+    pointer-events: none;
+    transition: background 0.8s ease-in-out;
+  }
+  
+  
+  /* El contenedor real del mapa: encima del pseudo-fondo y con recorte */
+  #map {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    width: 100%;
+    border-radius: 12px;    /* si quieres esquinas redondeadas */
+    overflow: hidden;       /* importante para que los tiles no sobresalgan */
+    background-color: transparent; /* que no tape el pseudo */
+  }
+  
+  /* Forzar transparencia y quitar fondos blancos de capas internas de Leaflet */
+  .leaflet-container,
+  .leaflet-pane,
+  .leaflet-layer,
+  .leaflet-tile,
+  .leaflet-control {
+    background: transparent !important;
+  }
+  
+  /* Estilo más oscuro para los controles (zoom / atribuciones) */
+  .leaflet-control-container .leaflet-control-zoom,
+  .leaflet-control-container .leaflet-control-attribution {
+    background: rgba(8, 12, 10, 0.5);
+    color: #dfeee8;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+  }
+  
+  /* Ajustes para evitar líneas blancas entre tiles (si aparece) */
+  .leaflet-tile {
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+  }
+  #scrollButton {
+    padding: 14px 40px;
+    border-radius: 10px;
+    background: none; /* sin relleno */
+    border: 2px solid #227422; /* contorno */
+    color: #909190; /* texto del mismo color */
+    font-family: inherit;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  #scrollButton:hover {
+    background: rgba(101, 243, 132, 0.1);
+    box-shadow: 0 0 20px -5px #197234;
+  }
+  
+  #scrollButton:active {
+    transform: scale(0.96);
+    box-shadow: 0 0 15px -3px #197234;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+    background: url('assets/images/globo.png') no-repeat center center;
+    background-size: contain; /* o cover si querés que llene más */
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  
+  /* Asegurar que título y botón estén encima */
+  .hero .title,
+  .hero button {
+    position: relative;
+    z-index: 1;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
