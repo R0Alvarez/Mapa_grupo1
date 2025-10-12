@@ -123,34 +123,6 @@ locations.forEach(loc => {
 spinGlobe();
 
 // === MARCADORES DE ANIMALES ===
-// Usa las mismas coordenadas que tenías antes
-const animales = [
-  {
-    nombre: "León",
-    coords: [31.2357, -1.2921],
-    imagen: "img/leon.png",
-    descripcion: "Rey de la sabana africana."
-  },
-  {
-    nombre: "Oso Polar",
-    coords: [-45.0, 70.0],
-    imagen: "img/oso_polar.png",
-    descripcion: "Habita en las regiones árticas."
-  },
-  {
-    nombre: "Canguro",
-    coords: [133.7751, -25.2744],
-    imagen: "img/canguro.png",
-    descripcion: "Marsupial característico de Australia."
-  },
-  {
-    nombre: "Pingüino",
-    coords: [-60.0, -70.0],
-    imagen: "img/pinguino.png",
-    descripcion: "Aves no voladoras del hemisferio sur."
-  }
-];
-
 // Crear marcadores
 animales.forEach((animal) => {
   const el = document.createElement('div');
