@@ -341,12 +341,11 @@ body {
 #animal-card p:last-child {
     padding-bottom: 15px;
 }
-
 .video-link {
   display: inline-block;
   margin-top: 8px;
   padding: 6px 12px;
-  background-color: rgba(34,197,94,0.8); /* color verde acorde a tu tema */
+  background-color: rgba(34,197,94,0.8);
   color: white;
   text-decoration: none;
   border-radius: 6px;
