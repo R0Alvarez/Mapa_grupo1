@@ -72,7 +72,7 @@ spinGlobe();
 const locations = [
   { name: "Amazonas", coords: [-60, -3], animal: { common: "Jaguar", scientific: "Panthera onca", description: "Depredador del Amazonas amenazado por la deforestación.", image: "assets/images/jaguar.jpg",
     video:"https://youtu.be/fE-6a1_pgPY?si=XGM3-uzKBIXM5rje" } },
-  { name: "África Central", coords: [20, 0], animal: { common: "Gorila de montaña", scientific: "Gorilla beringei beringei", description: "Uno de los primates más amenazados del mundo.", image: "assets/images/gorila.jpeg" , video:"https://youtu.be/6tCHfQz0Vt4?si=toy-e2qH1vY4IB2x"} },
+  { name: "África Central", coords: [20, 0], animal: { common: "Gorila de montaña", scientific: "Gorilla beringei beringei", description: "Uno de los primates más amenazados del mundo actualmente.", image: "assets/images/gorila.jpeg" , video:"https://youtu.be/6tCHfQz0Vt4?si=toy-e2qH1vY4IB2x"} },
   { name: "Australia", coords: [133, -25], animal: { common: "Demonio de Tasmania", scientific: "Sarcophilus harrisii", description: "Carnívoro en peligro crítico debido a un cáncer transmisible.", image: "assets/images/tasmania.jpeg" , video:"https://youtube.com/shorts/1RSdaQV6a5k?si=Rj3RZOazFdrIqjED" } },
   { name: "China", coords: [105, 35], animal: { common: "Panda gigante", scientific: "Ailuropoda melanoleuca", description: "Símbolo de conservación en China, depende de los bosques de bambú.", image: "assets/images/Panda2.jpg" , video:"https://youtu.be/6fe23yeoe54?si=OXXMNCQ-YyPenoJD" } },
   { name: "Madagascar", coords: [47, -20], animal: { common: "Lémur", scientific: "Lemur catta", description: "Endémico de Madagascar, amenazado por pérdida de hábitat.", image: "assets/images/lemur.jpeg" , video:"https://youtu.be/MzdcfzT3glI?si=UnLe3IxW3wnamlbD" } },
