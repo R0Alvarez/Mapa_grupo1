@@ -139,6 +139,7 @@ const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
     <img src="${animal.imagen}" alt="${animal.nombre}">
     <h3>${animal.nombre}</h3>
     <p>${animal.descripcion}</p>
+    <a href="${animal.video}" target="_blank" class="video-link">Ver video</a>
   </div>
 `);
 
