@@ -20,22 +20,24 @@
 
   </section>
 
-  <!-- 🗺️ Sección del mapa -->
-  <section id="map-section">
-    <div id="map"></div>
-  </section>
+ <!-- 🌍 Globo 3D -->
+<section id="map-section">
+  <div id="map"></div>
+  <button id="btn-spin">Pausar rotación</button>
+</section>
 
-  <!-- 📜 Tarjeta flotante con info de animales -->
-  <div id="animal-card" class="hidden">
-    <img id="animal-image" src="" alt="">
-    <h2 id="animal-common"></h2>
-    <p id="animal-scientific"></p>
-    <p id="animal-description"></p>
-  </div>
+<!-- 📜 Tarjeta flotante con info de animales -->
+<div id="animal-card" class="hidden">
+  <img id="animal-image" src="" alt="">
+  <h2 id="animal-common"></h2>
+  <p id="animal-scientific"></p>
+  <p id="animal-description"></p>
+</div>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="script.js"></script>
+<!-- Scripts -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="script.js"></script>
 
   <!-- Script opcional: scroll suave al mapa -->
   <script>
