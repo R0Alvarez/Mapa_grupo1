@@ -121,3 +121,56 @@ locations.forEach(loc => {
 
 
 spinGlobe();
+
+// === MARCADORES DE ANIMALES ===
+// Usa las mismas coordenadas que tenías antes
+const animales = [
+  {
+    nombre: "León",
+    coords: [31.2357, -1.2921],
+    imagen: "img/leon.png",
+    descripcion: "Rey de la sabana africana."
+  },
+  {
+    nombre: "Oso Polar",
+    coords: [-45.0, 70.0],
+    imagen: "img/oso_polar.png",
+    descripcion: "Habita en las regiones árticas."
+  },
+  {
+    nombre: "Canguro",
+    coords: [133.7751, -25.2744],
+    imagen: "img/canguro.png",
+    descripcion: "Marsupial característico de Australia."
+  },
+  {
+    nombre: "Pingüino",
+    coords: [-60.0, -70.0],
+    imagen: "img/pinguino.png",
+    descripcion: "Aves no voladoras del hemisferio sur."
+  }
+];
+
+// Crear marcadores
+animales.forEach((animal) => {
+  const el = document.createElement('div');
+  el.className = 'marker';
+  el.style.backgroundImage = `url(${animal.imagen})`;
+  el.style.width = '40px';
+  el.style.height = '40px';
+  el.style.backgroundSize = 'cover';
+  el.style.borderRadius = '50%';
+  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+  
+  const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+    <div class="tarjeta-animal">
+      <h3>${animal.nombre}</h3>
+      <p>${animal.descripcion}</p>
+    </div>
+  `);
+  
+  new mapboxgl.Marker(el)
+    .setLngLat(animal.coords)
+    .setPopup(popup)
+    .addTo(map);
+});
