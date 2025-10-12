@@ -181,71 +181,72 @@ const locations = [
     }
   }
 ];
-// 📍 Agregar marcadores y tarjetas
-locations.forEach(loc => {
-  // Crear marcador personalizado
+// 🔹 Crear marcadores con popups y degradado
+locations.forEach((loc) => {
+  // Crear marcador circular con imagen
   const el = document.createElement('div');
   el.className = 'marker';
-  el.style.width = '14px';
-  el.style.height = '14px';
-  el.style.background = '#4ade80';
+  el.style.width = '40px';
+  el.style.height = '40px';
+  el.style.backgroundImage = `url(${loc.animal.image})`;
+  el.style.backgroundSize = 'cover';
   el.style.borderRadius = '50%';
-  el.style.boxShadow = '0 0 12px rgba(74,222,128,0.6)';
-  el.style.cursor = 'pointer';
+  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
 
-  // Crear popup
- const popupHTML = `
-  <div style="
-    width:220px;
-    border-radius:12px;
-    overflow:hidden;
-    background:radial-gradient(circle at top, rgba(74,222,128,0.3), rgba(0,0,0,0.9));
-    color:white;
-    text-align:center;
-    box-shadow:0 4px 20px rgba(0,0,0,0.5);
-    font-family: 'Poppins', sans-serif;
-  ">
-    <img src="${loc.animal.image}" style="width:100%;height:120px;object-fit:cover;">
-    <h3 style="margin:8px 0 2px;">${loc.animal.common}</h3>
-    <p style="margin:0;font-size:0.85rem;font-style:italic;">${loc.animal.scientific}</p>
-    <p style="margin:6px;font-size:0.8rem;">${loc.animal.description}</p>
-    <a href="${loc.animal.video}" target="_blank" class="video-link">Ver video</a>
-  </div>
-`;
+  // Crear hitbox invisible más grande para facilitar click
+  const hitbox = document.createElement('div');
+  hitbox.style.width = '60px';
+  hitbox.style.height = '60px';
+  hitbox.style.borderRadius = '50%';
+  hitbox.style.cursor = 'pointer';
 
+  // Determinar color del degradado según zona
+  let gradientColor;
+  switch (loc.name) {
+    case "Amazonas":
+    case "América del Norte":
+    case "Patagonia":
+      gradientColor = "rgba(34,197,94,0.3)"; break; // verde
+    case "África Central":
+    case "Madagascar":
+      gradientColor = "rgba(239,68,68,0.3)"; break; // rojo
+    case "Australia":
+      gradientColor = "rgba(245,158,11,0.3)"; break; // naranja
+    case "China":
+    case "Siberia":
+    case "Sudeste Asiático":
+      gradientColor = "rgba(59,130,246,0.3)"; break; // azul
+    default:
+      gradientColor = "rgba(255,255,255,0.2)";
+  }
 
-  new mapboxgl.Marker(el)
+  // Contenido del popup
+  const popupHTML = `
+    <div style="
+      width: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, ${gradientColor} 0%, rgba(0,0,0,0.9) 80%);
+      color: white;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      font-family: 'Poppins', sans-serif;
+    ">
+      <img src="${loc.animal.image}" style="width:100%; height:120px; object-fit:cover; margin-bottom:6px;"/>
+      <h3 style="margin:4px 0 2px;">${loc.animal.common}</h3>
+      <p style="margin:0; font-size:0.85rem; font-style:italic;">${loc.animal.scientific}</p>
+      <p style="margin:6px 8px 8px; font-size:0.8rem;">${loc.animal.description}</p>
+      <a href="${loc.animal.video}" target="_blank" class="video-link">Ver video</a>
+    </div>
+  `;
+
+  // Crear marcador en Mapbox
+  const marker = new mapboxgl.Marker(el)
     .setLngLat(loc.coords)
     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
     .addTo(map);
-});
 
-
-spinGlobe();
-
-// === MARCADORES DE ANIMALES ===
-// Crear marcadores
-animales.forEach((animal) => {
-  const el = document.createElement('div');
-  el.className = 'marker';
-  el.style.backgroundImage = `url(${animal.imagen})`;
-  el.style.width = '40px';
-  el.style.height = '40px';
-  el.style.backgroundSize = 'cover';
-  el.style.borderRadius = '50%';
-
-  // Aquí va tu popup con el botón de YouTube
-  const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-    <div class="tarjeta-animal">
-      <img src="${animal.imagen}" alt="${animal.nombre}">
-      <h3>${animal.nombre}</h3>
-      <p>${animal.descripcion}</p>
-      <a href="${animal.video}" target="_blank" class="video-link">Ver video</a>
-    </div>
-  `);
-
-  new mapboxgl.Marker(el)
-    .setLngLat(animal.coords)
-    .setPopup(popup)
-    .addTo(map);
+  // Click en hitbox dispara el popup
+  el.appendChild(hitbox);
+  hitbox.addEventListener('click', () => marker.togglePopup());
 });
