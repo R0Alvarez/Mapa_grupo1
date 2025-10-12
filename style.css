@@ -346,7 +346,7 @@ body {
   margin-top: 8px;
   padding: 6px 12px;
   background-color: rgba(34,197,94,0.8);
-  color: white;
+  color: green;
   text-decoration: none;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -356,4 +356,3 @@ body {
 .video-link:hover {
   background-color: rgba(34,197,94,1);
 }
-
