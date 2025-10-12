@@ -43,18 +43,20 @@ body {
     position: relative; /* necesario si quieres que los hijos absolutos se posicionen relativo al body */
   }
   
-  #animal-card {
-    position: absolute; /* antes estaba fixed o top-right */
-    background-color: rgba(15, 35, 25, 0.95);
-    color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.5);
-    padding: 15px;
-    width: 280px;
-    pointer-events: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 1000;  /* <<< Esto hace que esté sobre el mapa */
-  }
+ #animal-card {
+    position: absolute;
+    background-color: rgba(15, 35, 25, 0.95);
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    /* 🔑 Quitamos el padding aquí */
+    width: 280px;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    /* Aseguramos que nada se salga */
+    overflow: hidden; 
+  }
   
   #animal-card.hidden {
     opacity: 0;
@@ -70,18 +72,16 @@ body {
   
 
   
+/* REGLA MODIFICADA: La imagen en sí */
 #animal-card img {
-    /* Mantenemos el ancho al 100% del contenedor de 280px */
-    width: 100%;
-    /* 🔑 Quitamos la altura fija (height: 180px) */
+    width: 100%;
+    /* 🔑 IMPORTANTE: Esto elimina un posible espacio blanco debajo de la imagen */
+    display: block; 
+    /* Quitamos el radio y margen porque ahora están en el wrapper o en los contenidos */
+    border-radius: 0; 
+    margin-bottom: 0;
     height: auto;
-    /* 🔑 Quitamos object-fit: cover, ya no es necesario */
-    object-fit: initial; 
-    
-    /* Mantenemos el estilo visual */
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
+  }
   
   /* === Fondo elegante para la sección principal === */
 .hero {
@@ -321,5 +321,23 @@ body {
   margin: 5px 0 0;
   font-size: 13px;
 }
+/* NUEVA REGLA: Contenedor de la Imagen */
+.card-image-wrapper {
+    width: 100%;
+    /* 🔑 Le damos el espacio de margen inferior al wrapper */
+    margin-bottom: 10px;
+    /* 🔑 Esto controla que la imagen no se salga */
+    overflow: hidden; 
+}
 
+/* NUEVA REGLA: Contenido de texto */
+#animal-card h2, 
+#animal-card p {
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
+/* Y quizás un padding inferior al último párrafo */
+#animal-card p:last-child {
+    padding-bottom: 15px;
+}
