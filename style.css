@@ -257,4 +257,32 @@ body {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  
+
+/* 🌍 Estilos del globo 3D */
+#map {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  border-radius: 0;
+}
+
+#btn-spin {
+  font: bold 13px/22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  color: #c2ffca;
+  border: 2px solid #c2ffca;
+  border-radius: 8px;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  cursor: pointer;
+  padding: 8px 18px;
+  backdrop-filter: blur(3px);
+  transition: all 0.3s ease;
+}
+
+#btn-spin:hover {
+  background-color: rgba(194, 255, 202, 0.15);
+}
