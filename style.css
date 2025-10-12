@@ -70,10 +70,14 @@ body {
   
 
   
-  #animal-card img {
+ #animal-card img {
+  
     width: 100%;
+    height: 180px; /* Puedes ajustar este valor (ej: 150px o 200px) */
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
+}
   }
   
   /* === Fondo elegante para la sección principal === */
@@ -313,12 +317,6 @@ body {
 .tarjeta-animal p {
   margin: 5px 0 0;
   font-size: 13px;
-.tarjeta-animal img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: contain;
-  max-height: 150px;
 }
 
 
