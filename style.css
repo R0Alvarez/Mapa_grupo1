@@ -313,5 +313,12 @@ body {
 .tarjeta-animal p {
   margin: 5px 0 0;
   font-size: 13px;
+.tarjeta-animal img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+  max-height: 150px;
 }
+
 
