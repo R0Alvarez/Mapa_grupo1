@@ -289,6 +289,15 @@ body {
 
 .marker {
   cursor: pointer;
+  background-size: contain; /* Antes era cover */
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.7); /* pequeño borde de fondo */
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 .tarjeta-animal {
   background: rgba(255, 255, 255, 0.9);
