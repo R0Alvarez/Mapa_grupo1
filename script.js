@@ -68,21 +68,119 @@ document.getElementById('btn-spin').addEventListener('click', e => {
 
 spinGlobe();
 
-// 🦊 Datos de animales (mismos que antes)
+// 🦊 Datos de animales
 const locations = [
-  { name: "Amazonas", coords: [-60, -3], animal: { common: "Jaguar", scientific: "Panthera onca", description: "Depredador del Amazonas amenazado por la deforestación.", image: "assets/images/jaguar.jpg",
-    video:"https://youtu.be/fE-6a1_pgPY?si=XGM3-uzKBIXM5rje" } },
-  { name: "África Central", coords: [20, 0], animal: { common: "Gorila de montaña", scientific: "Gorilla beringei beringei", description: "Uno de los primates más amenazados del mundo actualmente.", image: "assets/images/gorila.jpeg" , video:"https://youtu.be/6tCHfQz0Vt4?si=toy-e2qH1vY4IB2x"} },
-  { name: "Australia", coords: [133, -25], animal: { common: "Demonio de Tasmania", scientific: "Sarcophilus harrisii", description: "Carnívoro en peligro crítico debido a un cáncer transmisible.", image: "assets/images/tasmania.jpeg" , video:"https://youtube.com/shorts/1RSdaQV6a5k?si=Rj3RZOazFdrIqjED" } },
-  { name: "China", coords: [105, 35], animal: { common: "Panda gigante", scientific: "Ailuropoda melanoleuca", description: "Símbolo de conservación en China, depende de los bosques de bambú.", image: "assets/images/Panda2.jpg" , video:"https://youtu.be/6fe23yeoe54?si=OXXMNCQ-YyPenoJD" } },
-  { name: "Madagascar", coords: [47, -20], animal: { common: "Lémur", scientific: "Lemur catta", description: "Endémico de Madagascar, amenazado por pérdida de hábitat.", image: "assets/images/lemur.jpeg" , video:"https://youtu.be/MzdcfzT3glI?si=UnLe3IxW3wnamlbD" } },
-  { name: "Siberia", coords: [105, 60], animal: { common: "Tigre siberiano", scientific: "Panthera tigris altaica", description: "Uno de los felinos más grandes y amenazados del mundo.", image: "assets/images/tigre.jpeg" , video:"https://youtube.com/shorts/0TWT0a2VRlE?si=oICSfkl6yIAaCGDn" } },
-  { name: "América del Norte", coords: [-100, 45], animal: { common: "Hurón de Patas Negras", scientific: "Mustela nigripes", description: "Depende de los perritos de la pradera, amenazado por pérdida de hábitat.", image: "assets/images/huron.jpeg" , video:"https://youtube.com/shorts/EwXt7Mqey1o?si=zRlI2ti60jtjh0Pr"} },
-  { name: "Islas Galápagos", coords: [-90, -0.5], animal: { common: "Tortuga gigante", scientific: "Chelonoidis nigra", description: "Especie icónica en peligro debido a especies invasoras.", image: "assets/images/tortuga.jpeg" , video:"https://youtu.be/O1ElMch6Iik?si=EeeFlYyNHU77IKH8" } },
-  { name: "Sudeste Asiático", coords: [105, 15], animal: { common: "Elefante asiático", scientific: "Elephas maximus", description: "Amenazado por caza furtiva y pérdida de hábitat.", image: "assets/images/elefante.jpeg" , video:"https://youtu.be/1EiYvf0vmq8?si=RQSXp6nodnagbch1"} },
-  { name: "Patagonia", coords: [-70, -45], animal: { common: "Guanaco", scientific: "Lama guanicoe", description: "Camélido sudamericano en áreas protegidas de la Patagonia.", image: "assets/images/guanaco.jpeg" , video:"https://youtube.com/watch?v=TZor8AHBixU&feature=shared" } }
+  {
+    name: "Amazonas",
+    coords: [-60, -3],
+    animal: {
+      common: "Jaguar",
+      scientific: "Panthera onca",
+      description: "Depredador del Amazonas amenazado por la deforestación.",
+      image: "assets/images/jaguar.jpg",
+      video: "https://youtu.be/fE-6a1_pgPY?si=XGM3-uzKBIXM5rje"
+    }
+  },
+  {
+    name: "África Central",
+    coords: [20, 0],
+    animal: {
+      common: "Gorila de montaña",
+      scientific: "Gorilla beringei beringei",
+      description: "Uno de los primates más amenazados del mundo actualmente.",
+      image: "assets/images/gorila.jpeg",
+      video: "https://youtu.be/6tCHfQz0Vt4?si=toy-e2qH1vY4IB2x"
+    }
+  },
+  {
+    name: "Australia",
+    coords: [133, -25],
+    animal: {
+      common: "Demonio de Tasmania",
+      scientific: "Sarcophilus harrisii",
+      description: "Carnívoro en peligro crítico debido a un cáncer transmisible.",
+      image: "assets/images/tasmania.jpeg",
+      video: "https://youtube.com/shorts/1RSdaQV6a5k?si=Rj3RZOazFdrIqjED"
+    }
+  },
+  {
+    name: "China",
+    coords: [105, 35],
+    animal: {
+      common: "Panda gigante",
+      scientific: "Ailuropoda melanoleuca",
+      description: "Símbolo de conservación en China, depende de los bosques de bambú.",
+      image: "assets/images/Panda2.jpg",
+      video: "https://youtu.be/6fe23yeoe54?si=OXXMNCQ-YyPenoJD"
+    }
+  },
+  {
+    name: "Madagascar",
+    coords: [47, -20],
+    animal: {
+      common: "Lémur",
+      scientific: "Lemur catta",
+      description: "Endémico de Madagascar, amenazado por pérdida de hábitat.",
+      image: "assets/images/lemur.jpeg",
+      video: "https://youtu.be/MzdcfzT3glI?si=UnLe3IxW3wnamlbD"
+    }
+  },
+  {
+    name: "Siberia",
+    coords: [105, 60],
+    animal: {
+      common: "Tigre siberiano",
+      scientific: "Panthera tigris altaica",
+      description: "Uno de los felinos más grandes y amenazados del mundo.",
+      image: "assets/images/tigre.jpeg",
+      video: "https://youtube.com/shorts/0TWT0a2VRlE?si=oICSfkl6yIAaCGDn"
+    }
+  },
+  {
+    name: "América del Norte",
+    coords: [-100, 45],
+    animal: {
+      common: "Hurón de Patas Negras",
+      scientific: "Mustela nigripes",
+      description: "Depende de los perritos de la pradera, amenazado por pérdida de hábitat.",
+      image: "assets/images/huron.jpeg",
+      video: "https://youtube.com/shorts/EwXt7Mqey1o?si=zRlI2ti60jtjh0Pr"
+    }
+  },
+  {
+    name: "Islas Galápagos",
+    coords: [-90, -0.5],
+    animal: {
+      common: "Tortuga gigante",
+      scientific: "Chelonoidis nigra",
+      description: "Especie icónica en peligro debido a especies invasoras.",
+      image: "assets/images/tortuga.jpeg",
+      video: "https://youtu.be/O1ElMch6Iik?si=EeeFlYyNHU77IKH8"
+    }
+  },
+  {
+    name: "Sudeste Asiático",
+    coords: [105, 15],
+    animal: {
+      common: "Elefante asiático",
+      scientific: "Elephas maximus",
+      description: "Amenazado por caza furtiva y pérdida de hábitat.",
+      image: "assets/images/elefante.jpeg",
+      video: "https://youtu.be/1EiYvf0vmq8?si=RQSXp6nodnagbch1"
+    }
+  },
+  {
+    name: "Patagonia",
+    coords: [-70, -45],
+    animal: {
+      common: "Guanaco",
+      scientific: "Lama guanicoe",
+      description: "Camélido sudamericano en áreas protegidas de la Patagonia.",
+      image: "assets/images/guanaco.jpeg",
+      video: "https://youtube.com/watch?v=TZor8AHBixU&feature=shared"
+    }
+  }
 ];
-
 // 📍 Agregar marcadores y tarjetas
 locations.forEach(loc => {
   // Crear marcador personalizado
@@ -96,23 +194,25 @@ locations.forEach(loc => {
   el.style.cursor = 'pointer';
 
   // Crear popup
-  const popupHTML = `
-    <div style="
-      width:220px;
-      border-radius:12px;
-      overflow:hidden;
-      background:radial-gradient(circle at top, rgba(74,222,128,0.3), rgba(0,0,0,0.9));
-      color:white;
-      text-align:center;
-      box-shadow:0 4px 20px rgba(0,0,0,0.5);
-      font-family: 'Poppins', sans-serif;
-    ">
-      <img src="${loc.animal.image}" style="width:100%;height:120px;object-fit:cover;">
-      <h3 style="margin:8px 0 2px;">${loc.animal.common}</h3>
-      <p style="margin:0;font-size:0.85rem;font-style:italic;">${loc.animal.scientific}</p>
-      <p style="margin:6px;font-size:0.8rem;">${loc.animal.description}</p>
-    </div>
-  `;
+ const popupHTML = `
+  <div style="
+    width:220px;
+    border-radius:12px;
+    overflow:hidden;
+    background:radial-gradient(circle at top, rgba(74,222,128,0.3), rgba(0,0,0,0.9));
+    color:white;
+    text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.5);
+    font-family: 'Poppins', sans-serif;
+  ">
+    <img src="${loc.animal.image}" style="width:100%;height:120px;object-fit:cover;">
+    <h3 style="margin:8px 0 2px;">${loc.animal.common}</h3>
+    <p style="margin:0;font-size:0.85rem;font-style:italic;">${loc.animal.scientific}</p>
+    <p style="margin:6px;font-size:0.8rem;">${loc.animal.description}</p>
+    <a href="${loc.animal.video}" target="_blank" class="video-link">Ver video</a>
+  </div>
+`;
+
 
   new mapboxgl.Marker(el)
     .setLngLat(loc.coords)
