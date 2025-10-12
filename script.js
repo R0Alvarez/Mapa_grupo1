@@ -162,12 +162,14 @@ animales.forEach((animal) => {
   el.style.borderRadius = '50%';
   el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
   
-  const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
-    <div class="tarjeta-animal">
-      <h3>${animal.nombre}</h3>
-      <p>${animal.descripcion}</p>
-    </div>
-  `);
+const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+  <div class="tarjeta-animal">
+    <img src="${animal.imagen}" alt="${animal.nombre}">
+    <h3>${animal.nombre}</h3>
+    <p>${animal.descripcion}</p>
+  </div>
+`);
+
   
   new mapboxgl.Marker(el)
     .setLngLat(animal.coords)
