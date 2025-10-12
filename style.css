@@ -286,3 +286,23 @@ body {
 #btn-spin:hover {
   background-color: rgba(194, 255, 202, 0.15);
 }
+
+.marker {
+  cursor: pointer;
+}
+.tarjeta-animal {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-family: sans-serif;
+}
+.tarjeta-animal h3 {
+  margin: 0;
+  font-size: 16px;
+}
+.tarjeta-animal p {
+  margin: 5px 0 0;
+  font-size: 13px;
+}
+
