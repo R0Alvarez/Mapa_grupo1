@@ -275,4 +275,56 @@ window.addEventListener('load', () => {
     }, 2300);
   });
 });
+// ---------- Control de la carátula / loader ----------
+(function () {
+  // Ejecutar cuando DOM esté listo
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(function () {
+    const loader = document.getElementById('intro');
+    const btn = document.getElementById('continuar-btn');
+    const stripes = loader ? loader.querySelectorAll('.stripe') : null;
+
+    if (!loader) {
+      console.warn('No se encontró #intro (carátula).');
+      return;
+    }
+    if (!btn) {
+      console.warn('No se encontró #continuar-btn (botón).');
+      return;
+    }
+    // Al hacer click en Continuar
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Añadimos la clase 'loaded' para que las stripes hagan su transform
+      loader.classList.add('loaded');
+
+      // Si además quieres un efecto escalonado en cada stripe usando JS:
+      if (stripes && stripes.length) {
+        stripes.forEach((stripe, i) => {
+          // pequeña separación entre cada stripe
+          stripe.style.transitionDelay = `${i * 0.08}s`;
+          // forzamos el transform (esto dispara la animación si tu CSS lo usa)
+          stripe.style.transform = 'translateY(100%)';
+        });
+      }
+
+      // Después de que las stripes bajen (esperar 800ms aprox), hacemos fade-out
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+      }, 850);
+
+      // Eliminamos la carátula del DOM pasado el tiempo de la animación
+      setTimeout(() => {
+        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 2400);
+    });
+  });
+})();
 
