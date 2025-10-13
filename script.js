@@ -250,3 +250,29 @@ locations.forEach((loc) => {
   el.appendChild(hitbox);
   hitbox.addEventListener('click', () => marker.togglePopup());
 });
+
+// === Animación de carátula y botón ===
+window.addEventListener('load', () => {
+  const loader = document.getElementById('intro');
+  const stripes = loader.querySelectorAll('.stripe');
+  const btn = document.getElementById('continuar-btn');
+
+  // Al presionar "Continuar"
+  btn.addEventListener('click', () => {
+    // Activa animación de las bandas
+    stripes.forEach((stripe, i) => {
+      setTimeout(() => stripe.style.transform = 'translateY(100%)', i * 100);
+    });
+
+    // Luego desvanece el resto
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+    }, 800);
+
+    // Finalmente elimina la carátula
+    setTimeout(() => {
+      loader.remove();
+    }, 2300);
+  });
+});
+
