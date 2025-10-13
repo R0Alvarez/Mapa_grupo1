@@ -465,4 +465,25 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+.loader .stripe {
+  flex: 1;
+  background: #111;
+  transition: transform 0.8s ease;
+}
+
+.loader.loaded .stripe {
+  transform: translateY(100%);
+}
+
+.loader .stripe:nth-child(1) { transition-delay: 0.0s; }
+.loader .stripe:nth-child(2) { transition-delay: 0.08s; }
+.loader .stripe:nth-child(3) { transition-delay: 0.16s; }
+.loader .stripe:nth-child(4) { transition-delay: 0.24s; }
+
+.loader.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  pointer-events: none;
+}
 
