@@ -302,17 +302,15 @@ body {
 
 .marker {
   cursor: pointer;
-  background-size: cover;
+  background-size: contain; /* Antes era cover */
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
-  overflow: visible !important;
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 40px !important;
-  height: 40px !important;
-  box-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 10px rgba(0,0,0,0.3);
-  border: 3px solid rgba(255, 255, 255, 0.8);
-  transition: transform 0.2s ease;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.7); /* pequeño borde de fondo */
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 .tarjeta-animal {
   background: rgba(255, 255, 255, 0.9);
