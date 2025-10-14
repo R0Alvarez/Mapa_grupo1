@@ -4,10 +4,10 @@
 
 const AudioSystem = {
   sounds: {
-    buttonClick: new Audio('assets/sound/button-click.mp3'),
-    buttonHover: new Audio('assets/sound/button-hover.mp3'),
-    markerClick: new Audio('assets/sound/marker-click.mp3'),
-    popupOpen: new Audio('assets/sound/popup-open.mp3'),
+    buttonClick: new Audio('assets/sound/button-click.wav'),
+    buttonHover: new Audio('assets/sound/button-hover.wav'),
+    markerClick: new Audio('assets/sound/marker-click.wav'),
+    popupOpen: new Audio('assets/sound/popup-open.wav'),
     backgroundMusic: new Audio('assets/sound/background-music.mp3')
   },
 
