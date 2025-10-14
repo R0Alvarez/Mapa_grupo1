@@ -4,10 +4,10 @@
 
 const AudioSystem = {
   sounds: {
-    buttonClick: new Audio('assets/sound/button-click.wav'),
-    buttonHover: new Audio('assets/sound/button-hover.wav'),
-    markerClick: new Audio('assets/sound/marker-click.wav'),
-    popupOpen: new Audio('assets/sound/popup-open.wav'),
+    buttonClick: new Audio('assets/sound/button-click.mp3'),
+    buttonHover: new Audio('assets/sound/button-hover.mp3'),
+    markerClick: new Audio('assets/sound/marker-click.mp3'),
+    popupOpen: new Audio('assets/sound/popup-open.mp3'),
     backgroundMusic: new Audio('assets/sound/background-music.mp3')
   },
 
@@ -174,18 +174,12 @@ scrollButton.addEventListener("click", () => {
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmllZ3JpZmZpbmRlc2lnbiIsImEiOiJja24waTQzeHYwbndvMnZtbnFrYXV3ZjdjIn0.zhhJzykz0VYq7RQWBJxh7A';
 
-// Detectar dispositivo para ajustar zoom
-const isMobile = window.innerWidth <= 768;
-const initialZoom = isMobile ? 1.5 : 1.8;
-
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/steviegriffindesign/clehjyzbi001k01s201eihjqn',
   projection: 'globe',
-  zoom: initialZoom,
-  center: [1.6889, 31.7091],
-  minZoom: 1,
-  maxZoom: 10
+  zoom: 2.3,
+  center: [1.6889, 31.7091]
 });
 
 map.on('style.load', () => {
