@@ -1,10 +1,177 @@
+// ==========================================
+// 🔊 SISTEMA DE AUDIO
+// ==========================================
+
+const AudioSystem = {
+  sounds: {
+    buttonClick: new Audio('assets/sound/button-click.wav'),
+    buttonHover: new Audio('assets/sound/button-hover.wav'),
+    markerClick: new Audio('assets/sound/marker-click.wav'),
+    popupOpen: new Audio('assets/sound/popup-open.wav'),
+    backgroundMusic: new Audio('assets/sound/background-music.mp3')
+  },
+
+  init() {
+    // Configurar música de fondo
+    this.sounds.backgroundMusic.loop = true;
+    this.sounds.backgroundMusic.volume = 0.3;
+
+    // Configurar volúmenes de efectos
+    this.sounds.buttonClick.volume = 0.5;
+    this.sounds.buttonHover.volume = 0.3;
+    this.sounds.markerClick.volume = 0.4;
+    this.sounds.popupOpen.volume = 0.4;
+
+    // Precargar sonidos
+    Object.values(this.sounds).forEach(sound => {
+      sound.load();
+    });
+  },
+
+  play(soundName) {
+    const sound = this.sounds[soundName];
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play().catch(err => console.log('Error reproduciendo audio:', err));
+    }
+  },
+
+  startBackgroundMusic() {
+    this.sounds.backgroundMusic.play().catch(err => {
+      console.log('Audio bloqueado por el navegador. Requiere interacción del usuario.');
+    });
+  },
+
+  stopBackgroundMusic() {
+    this.sounds.backgroundMusic.pause();
+    this.sounds.backgroundMusic.currentTime = 0;
+  },
+
+  fadeIn(soundName, duration = 1000) {
+    const sound = this.sounds[soundName];
+    if (!sound) return;
+
+    sound.volume = 0;
+    sound.play().catch(err => console.log('Error en fadeIn:', err));
+
+    const targetVolume = soundName === 'backgroundMusic' ? 0.3 : 0.5;
+    const steps = 20;
+    const stepTime = duration / steps;
+    const volumeStep = targetVolume / steps;
+
+    let currentStep = 0;
+    const fadeInterval = setInterval(() => {
+      currentStep++;
+      sound.volume = Math.min(volumeStep * currentStep, targetVolume);
+      
+      if (currentStep >= steps) {
+        clearInterval(fadeInterval);
+      }
+    }, stepTime);
+  },
+
+  fadeOut(soundName, duration = 1000) {
+    const sound = this.sounds[soundName];
+    if (!sound) return;
+
+    const startVolume = sound.volume;
+    const steps = 20;
+    const stepTime = duration / steps;
+    const volumeStep = startVolume / steps;
+
+    let currentStep = 0;
+    const fadeInterval = setInterval(() => {
+      currentStep++;
+      sound.volume = Math.max(startVolume - (volumeStep * currentStep), 0);
+      
+      if (currentStep >= steps) {
+        clearInterval(fadeInterval);
+        sound.pause();
+        sound.currentTime = 0;
+      }
+    }, stepTime);
+  }
+};
+
+// Inicializar sistema de audio
+AudioSystem.init();
+
+// ==========================================
+// 🎬 CARÁTULA CON AUDIO
+// ==========================================
+
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(function () {
+    const loader = document.getElementById('intro');
+    const btn = document.getElementById('continuar-btn');
+    const stripes = loader ? loader.querySelectorAll('.stripe') : null;
+
+    if (!loader || !btn) {
+      console.warn('No se encontró la carátula o el botón.');
+      return;
+    }
+
+    // Hover en botón continuar
+    btn.addEventListener('mouseenter', () => {
+      AudioSystem.play('buttonHover');
+    });
+
+    // Click en Continuar
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      AudioSystem.play('buttonClick');
+      
+      loader.classList.add('loaded');
+
+      if (stripes && stripes.length) {
+        stripes.forEach((stripe, i) => {
+          stripe.style.transitionDelay = `${i * 0.08}s`;
+          stripe.style.transform = 'translateY(100%)';
+        });
+      }
+
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+      }, 850);
+
+      setTimeout(() => {
+        if (loader && loader.parentNode) {
+          loader.parentNode.removeChild(loader);
+        }
+        // Iniciar música de fondo al entrar al mapa
+        AudioSystem.fadeIn('backgroundMusic', 2000);
+      }, 2400);
+    });
+  });
+})();
+
+// ==========================================
+// 🎯 BOTÓN SCROLL CON AUDIO
+// ==========================================
+
 const scrollButton = document.getElementById("scrollButton");
+
+scrollButton.addEventListener('mouseenter', () => {
+  AudioSystem.play('buttonHover');
+});
+
 scrollButton.addEventListener("click", () => {
+  AudioSystem.play('buttonClick');
   document.getElementById("map-section").scrollIntoView({ behavior: "smooth" });
 });
 
+// ==========================================
+// 🌍 MAPA DE MAPBOX
+// ==========================================
 
-// 🔹 Inicializar mapa de Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmllZ3JpZmZpbmRlc2lnbiIsImEiOiJja24waTQzeHYwbndvMnZtbnFrYXV3ZjdjIn0.zhhJzykz0VYq7RQWBJxh7A';
 
 const map = new mapboxgl.Map({
@@ -55,20 +222,31 @@ map.on('pitchend', () => { userInteracting = false; spinGlobe(); });
 map.on('rotateend', () => { userInteracting = false; spinGlobe(); });
 map.on('moveend', () => spinGlobe());
 
-document.getElementById('btn-spin').addEventListener('click', e => {
+// Botón de rotación con audio
+const btnSpin = document.getElementById('btn-spin');
+
+btnSpin.addEventListener('mouseenter', () => {
+  AudioSystem.play('buttonHover');
+});
+
+btnSpin.addEventListener('click', e => {
+  AudioSystem.play('buttonClick');
   spinEnabled = !spinEnabled;
   if (spinEnabled) {
     spinGlobe();
-    e.target.innerHTML = 'Pause rotation';
+    e.target.innerHTML = 'Pausar rotación';
   } else {
     map.stop();
-    e.target.innerHTML = 'Start rotation';
+    e.target.innerHTML = 'Iniciar rotación';
   }
 });
 
 spinGlobe();
 
-// 🦊 Datos de animales
+// ==========================================
+// 🦊 DATOS DE ANIMALES
+// ==========================================
+
 const locations = [
   {
     name: "Amazonas",
@@ -181,9 +359,12 @@ const locations = [
     }
   }
 ];
-// 🔹 Crear marcadores con popups y degradado
+
+// ==========================================
+// 🎯 CREAR MARCADORES CON AUDIO
+// ==========================================
+
 locations.forEach((loc) => {
-  // Crear marcador circular con imagen
   const el = document.createElement('div');
   el.className = 'marker';
   el.style.width = '40px';
@@ -193,34 +374,31 @@ locations.forEach((loc) => {
   el.style.borderRadius = '50%';
   el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
 
-  // Crear hitbox invisible más grande para facilitar click
   const hitbox = document.createElement('div');
   hitbox.style.width = '60px';
   hitbox.style.height = '60px';
   hitbox.style.borderRadius = '50%';
   hitbox.style.cursor = 'pointer';
 
-  // Determinar color del degradado según zona
   let gradientColor;
   switch (loc.name) {
     case "Amazonas":
     case "América del Norte":
     case "Patagonia":
-      gradientColor = "rgba(34,197,94,0.3)"; break; // verde
+      gradientColor = "rgba(34,197,94,0.3)"; break;
     case "África Central":
     case "Madagascar":
-      gradientColor = "rgba(239,68,68,0.3)"; break; // rojo
+      gradientColor = "rgba(239,68,68,0.3)"; break;
     case "Australia":
-      gradientColor = "rgba(245,158,11,0.3)"; break; // naranja
+      gradientColor = "rgba(245,158,11,0.3)"; break;
     case "China":
     case "Siberia":
     case "Sudeste Asiático":
-      gradientColor = "rgba(59,130,246,0.3)"; break; // azul
+      gradientColor = "rgba(59,130,246,0.3)"; break;
     default:
       gradientColor = "rgba(255,255,255,0.2)";
   }
 
-  // Contenido del popup
   const popupHTML = `
     <div style="
       width: 220px;
@@ -240,91 +418,42 @@ locations.forEach((loc) => {
     </div>
   `;
 
-  // Crear marcador en Mapbox
   const marker = new mapboxgl.Marker(el)
     .setLngLat(loc.coords)
     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML))
     .addTo(map);
 
-  // Click en hitbox dispara el popup
+  // Audio en hover del marcador
+  hitbox.addEventListener('mouseenter', () => {
+    AudioSystem.play('buttonHover');
+  });
+
+  // Audio al hacer click en marcador
+  hitbox.addEventListener('click', () => {
+    AudioSystem.play('markerClick');
+    setTimeout(() => {
+      AudioSystem.play('popupOpen');
+    }, 150);
+    marker.togglePopup();
+  });
+
   el.appendChild(hitbox);
-  hitbox.addEventListener('click', () => marker.togglePopup());
 });
 
-// === Animación de carátula y botón ===
-window.addEventListener('load', () => {
-  const loader = document.getElementById('intro');
-  const stripes = loader.querySelectorAll('.stripe');
-  const btn = document.getElementById('continuar-btn');
+// ==========================================
+// 🎵 CONTROL DE MÚSICA AL HACER SCROLL
+// ==========================================
 
-  // Al presionar "Continuar"
-  btn.addEventListener('click', () => {
-    // Activa animación de las bandas
-    stripes.forEach((stripe, i) => {
-      setTimeout(() => stripe.style.transform = 'translateY(100%)', i * 100);
-    });
+let musicPlaying = false;
 
-    // Luego desvanece el resto
-    setTimeout(() => {
-      loader.classList.add('fade-out');
-    }, 800);
-
-    // Finalmente elimina la carátula
-    setTimeout(() => {
-      loader.remove();
-    }, 2300);
+const mapSection = document.getElementById('map-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !musicPlaying) {
+      AudioSystem.fadeIn('backgroundMusic', 2000);
+      musicPlaying = true;
+    }
   });
-});
-// ---------- Control de la carátula / loader ----------
-(function () {
-  // Ejecutar cuando DOM esté listo
-  function ready(fn) {
-    if (document.readyState !== 'loading') {
-      fn();
-    } else {
-      document.addEventListener('DOMContentLoaded', fn);
-    }
-  }
+}, { threshold: 0.3 });
 
-  ready(function () {
-    const loader = document.getElementById('intro');
-    const btn = document.getElementById('continuar-btn');
-    const stripes = loader ? loader.querySelectorAll('.stripe') : null;
-
-    if (!loader) {
-      console.warn('No se encontró #intro (carátula).');
-      return;
-    }
-    if (!btn) {
-      console.warn('No se encontró #continuar-btn (botón).');
-      return;
-    }
-    // Al hacer click en Continuar
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Añadimos la clase 'loaded' para que las stripes hagan su transform
-      loader.classList.add('loaded');
-
-      // Si además quieres un efecto escalonado en cada stripe usando JS:
-      if (stripes && stripes.length) {
-        stripes.forEach((stripe, i) => {
-          // pequeña separación entre cada stripe
-          stripe.style.transitionDelay = `${i * 0.08}s`;
-          // forzamos el transform (esto dispara la animación si tu CSS lo usa)
-          stripe.style.transform = 'translateY(100%)';
-        });
-      }
-
-      // Después de que las stripes bajen (esperar 800ms aprox), hacemos fade-out
-      setTimeout(() => {
-        loader.classList.add('fade-out');
-      }, 850);
-
-      // Eliminamos la carátula del DOM pasado el tiempo de la animación
-      setTimeout(() => {
-        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 2400);
-    });
-  });
-})();
-
+observer.observe(mapSection);
