@@ -314,21 +314,6 @@ body {
   border: 3px solid rgba(255, 255, 255, 0.8);
   transition: transform 0.2s ease;
 }
-
-.marker:hover {
-  transform: scale(1.2) !important;
-  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 15px rgba(0,0,0,0.5);
-}
-
-/* Popup de Mapbox */
-.mapboxgl-popup {
-  z-index: 200 !important;
-}
-
-.mapboxgl-popup-content {
-  padding: 0 !important;
-  border-radius: 12px !important;
-}
 .tarjeta-animal {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
