@@ -294,17 +294,49 @@ body {
   background-color: rgba(194, 255, 202, 0.15);
 }
 
+/* Asegurar visibilidad de marcadores */
+.mapboxgl-marker {
+  z-index: 10 !important;
+  pointer-events: auto !important;
+  transition: z-index 0s;
+}
+
 .marker {
   cursor: pointer;
-  background-size: contain; /* Antes era cover */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.7); /* pequeño borde de fondo */
-  width: 45px;
-  height: 45px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  overflow: hidden; /* CAMBIO: de visible a hidden */
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 10px rgba(0,0,0,0.3);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.marker:hover {
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 15px rgba(0,0,0,0.5);
+  z-index: 50 !important;
+}
+
+/* Popup de Mapbox - MUY IMPORTANTE */
+.mapboxgl-popup {
+  z-index: 1000 !important; /* AUMENTADO para estar sobre todo */
+}
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7) !important;
+}
+
+.mapboxgl-popup-tip {
+  z-index: 1001 !important;
 }
 .tarjeta-animal {
   background: rgba(255, 255, 255, 0.9);
