@@ -169,17 +169,23 @@ scrollButton.addEventListener("click", () => {
 });
 
 // ==========================================
-// 🌍 MAPA DE MAPBOX
+// 🌍 MAPA DE MAPBOX CON ZOOM AJUSTADO
 // ==========================================
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RldmllZ3JpZmZpbmRlc2lnbiIsImEiOiJja24waTQzeHYwbndvMnZtbnFrYXV3ZjdjIn0.zhhJzykz0VYq7RQWBJxh7A';
+
+// 🔧 Detectar dispositivo y ajustar zoom inicial
+const isMobile = window.innerWidth <= 768;
+const initialZoom = isMobile ? 1.5 : 1.3;
 
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/steviegriffindesign/clehjyzbi001k01s201eihjqn',
   projection: 'globe',
-  zoom: 2.3,
-  center: [1.6889, 31.7091]
+  zoom: initialZoom,
+  center: [1.6889, 31.7091],
+  minZoom: 0.8,
+  maxZoom: 6
 });
 
 map.on('style.load', () => {
@@ -193,10 +199,10 @@ map.on('style.load', () => {
   });
 });
 
-// 🌍 Rotación del globo
+// 🌍 Rotación del globo (ajustado para mejor visualización)
 const secondsPerRevolution = 120;
-const maxSpinZoom = 5;
-const slowSpinZoom = 3;
+const maxSpinZoom = 4;
+const slowSpinZoom = 2.5;
 
 let userInteracting = false;
 let spinEnabled = true;
@@ -367,18 +373,15 @@ const locations = [
 locations.forEach((loc) => {
   const el = document.createElement('div');
   el.className = 'marker';
-  el.style.width = '40px';
-  el.style.height = '40px';
+  el.style.width = '50px';
+  el.style.height = '50px';
   el.style.backgroundImage = `url(${loc.animal.image})`;
   el.style.backgroundSize = 'cover';
   el.style.borderRadius = '50%';
-  el.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
-
-  const hitbox = document.createElement('div');
-  hitbox.style.width = '60px';
-  hitbox.style.height = '60px';
-  hitbox.style.borderRadius = '50%';
-  hitbox.style.cursor = 'pointer';
+  el.style.cursor = 'pointer';
+  el.style.border = '3px solid rgba(255, 255, 255, 0.9)';
+  el.style.boxShadow = '0 0 15px rgba(255,255,255,0.6), 0 0 10px rgba(0,0,0,0.3)';
+  el.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
 
   let gradientColor;
   switch (loc.name) {
@@ -424,20 +427,24 @@ locations.forEach((loc) => {
     .addTo(map);
 
   // Audio en hover del marcador
-  hitbox.addEventListener('mouseenter', () => {
+  el.addEventListener('mouseenter', () => {
     AudioSystem.play('buttonHover');
+    el.style.transform = 'scale(1.2)';
+    el.style.boxShadow = '0 0 25px rgba(255,255,255,0.9), 0 0 15px rgba(0,0,0,0.5)';
+  });
+
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'scale(1)';
+    el.style.boxShadow = '0 0 15px rgba(255,255,255,0.6), 0 0 10px rgba(0,0,0,0.3)';
   });
 
   // Audio al hacer click en marcador
-  hitbox.addEventListener('click', () => {
+  el.addEventListener('click', () => {
     AudioSystem.play('markerClick');
     setTimeout(() => {
       AudioSystem.play('popupOpen');
     }, 150);
-    marker.togglePopup();
   });
-
-  el.appendChild(hitbox);
 });
 
 // ==========================================
