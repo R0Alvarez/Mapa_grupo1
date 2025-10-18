@@ -6,41 +6,10 @@ body {
     overflow-x: hidden;
   }
   
-  .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(180deg, #0b1e16, #123524);
-  }
-  
-  .title {
-    font-size: 3rem;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    animation: fadeIn 2s ease;
-  }
-
-  #scrollButton {
-    background-color: #25593c;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  #scrollButton:hover {
-    background-color: #377958;
-  }
-  
   #map {
     height: 100vh;
     width: 100%;
-    position: relative; /* necesario si quieres que los hijos absolutos se posicionen relativo al body */
+    position: relative;
   }
   
  #animal-card {
@@ -49,12 +18,10 @@ body {
     color: #fff;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0,0,0,0.5);
-    /* 🔑 Quitamos el padding aquí */
     width: 280px;
     pointer-events: auto;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 1000;
-    /* Aseguramos que nada se salga */
     overflow: hidden; 
   }
   
@@ -63,133 +30,207 @@ body {
     pointer-events: none;
   }
   
-
-  
   #animal-card.visible {
     opacity: 1;
     pointer-events: auto;
   }
-  
 
-  
-/* REGLA MODIFICADA: La imagen en sí */
 #animal-card img {
     width: 100%;
-    /* 🔑 IMPORTANTE: Esto elimina un posible espacio blanco debajo de la imagen */
     display: block; 
-    /* Quitamos el radio y margen porque ahora están en el wrapper o en los contenidos */
     border-radius: 0; 
     margin-bottom: 0;
     height: auto;
   }
-  
-  /* === Fondo elegante para la sección principal === */
-.hero {
+
+/* ========================================
+   🌍 HERO SECTION ESTILO PLANETA
+   ======================================== */
+
+.hero-planet {
   position: relative;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh;
+  width: 100%;
+  background: #000000;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: white;
-  text-align: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.hero::before {
-  content: "";
+/* Fondo con imagen del planeta */
+.planet-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  /* Fondo oscuro con puntitos y degradado */
-  background-color: #000;
-  background-image:
-    radial-gradient(circle at 25% 25%, #1a1a1a 0.5px, transparent 1px),
-    radial-gradient(circle at 75% 75%, #0f0f0f 0.5px, transparent 1px),
-    radial-gradient(125% 125% at 50% 10%, #000000 40%, #072607 100%);
-  background-size: 10px 10px, 10px 10px, auto;
-  image-rendering: pixelated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero h1 {
-  position: relative;
-  z-index: 1;
-  font-size: 3rem;
-  letter-spacing: 2px;
+.earth-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  opacity: 0.6;
+  filter: brightness(0.8) contrast(1.1);
+  animation: floatPlanet 6s ease-in-out infinite;
 }
 
-#scrollButton {
+/* Contenido centrado */
+.hero-content {
   position: relative;
-  z-index: 1;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: #16a34a;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  z-index: 10;
+  text-align: center;
+  color: #ffffff;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.planet-label {
+  font-size: 0.9rem;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  font-weight: 300;
+  animation: fadeInDown 1s ease-out 0.2s both;
+}
+
+.planet-name {
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: 15px;
+  margin: 0 0 30px 0;
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #ffffff, #a0d8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 1s ease-out 0.4s both;
+}
+
+.planet-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 650px;
+  margin: 0 auto 40px;
+  opacity: 0.9;
+  font-weight: 300;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.explore-btn {
+  padding: 14px 50px;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 1s ease-out 0.8s both;
 }
 
-#scrollButton:hover {
-  background: #22c55e;
-  transform: scale(1.05);
+.explore-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.explore-btn:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.explore-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Animaciones para Hero Planet */
+@keyframes floatPlanet {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.02); 
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* -------------------------
-  Fondo tipo puntitos + degradado circular para la sección del mapa
-   (reemplaza cualquier regla anterior para #map-section / #map)
-   Pegar al final de style.css
+  Fondo para la sección del mapa
    ------------------------ */
    #map-section {
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    background: transparent; /* dejar transparente para que el pseudo muestre */
+    background: transparent;
   }
   
-  /* pseudo-fondo con puntitos + degradado circular (detrás del mapa) */
   #map-section::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
-  
-    /* Color base oscuro similar al final de la portada */
     background-color: #05160598;
-  
-    /* Capas del patrón + degradado que conecta con la primera parte */
     background-image:
       radial-gradient(circle at 25% 25%, #1e1e1e 0.4px, transparent 1px),
       radial-gradient(circle at 75% 75%, #141414 0.4px, transparent 1px),
       radial-gradient(circle at 50% 50%, rgba(140, 140, 140, 0.25) 0%, rgba(13, 13, 13, 0.1) 65%, rgba(4, 26, 4, 1) 100%);
-    
     background-size: 12px 12px, 12px 12px, 800px 800px;
     background-repeat: repeat, repeat, no-repeat;
     background-position: center center;
     image-rendering: pixelated;
-    
-    /* Difumina la parte inferior */
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
-  
     pointer-events: none;
     transition: background 0.8s ease-in-out;
   }
   
-  
-  /* El contenedor real del mapa: encima del pseudo-fondo y con recorte */
   #map {
     position: relative;
     z-index: 1;
     height: 100vh;
     width: 100%;
-    border-radius: 12px;    /* si quieres esquinas redondeadas */
-    overflow: hidden;       /* importante para que los tiles no sobresalgan */
-    background-color: transparent; /* que no tape el pseudo */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: transparent;
   }
   
-  /* Forzar transparencia y quitar fondos blancos de capas internas de Leaflet */
   .leaflet-container,
   .leaflet-pane,
   .leaflet-layer,
@@ -198,7 +239,6 @@ body {
     background: transparent !important;
   }
   
-  /* Estilo más oscuro para los controles (zoom / atribuciones) */
   .leaflet-control-container .leaflet-control-zoom,
   .leaflet-control-container .leaflet-control-attribution {
     background: rgba(8, 12, 10, 0.5);
@@ -207,72 +247,12 @@ body {
     backdrop-filter: blur(4px);
   }
   
-  /* Ajustes para evitar líneas blancas entre tiles (si aparece) */
   .leaflet-tile {
     image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: nearest-neighbor;
   }
-  #scrollButton {
-    padding: 14px 40px;
-    border-radius: 10px;
-    background: none; /* sin relleno */
-    border: 2px solid #227422; /* contorno */
-    color: #909190; /* texto del mismo color */
-    font-family: inherit;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-  
-  #scrollButton:hover {
-    background: rgba(101, 243, 132, 0.1);
-    box-shadow: 0 0 20px -5px #197234;
-  }
-  
-  #scrollButton:active {
-    transform: scale(0.96);
-    box-shadow: 0 0 15px -3px #197234;
-  }
-
-  .hero::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80%;
-    height: 150%;
-    transform: translate(-50%, -50%);
-    background: url('assets/images/globo.png') no-repeat center center;
-    background-size: contain; /* o cover si querés que llene más */
-    opacity: 0.3;
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  
-  /* Asegurar que título y botón estén encima */
-  .hero .title,
-  .hero button {
-    position: relative;
-    z-index: 1;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 
 /* 🌍 Estilos del globo 3D */
-#map {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  border-radius: 0;
-}
-
 #btn-spin {
   font: bold 13px/22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   background-color: transparent;
@@ -294,18 +274,51 @@ body {
   background-color: rgba(194, 255, 202, 0.15);
 }
 
+/* Asegurar visibilidad de marcadores */
+.mapboxgl-marker {
+  z-index: 10 !important;
+  pointer-events: auto !important;
+  transition: z-index 0s;
+}
+
 .marker {
   cursor: pointer;
-  background-size: contain; /* Antes era cover */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.7); /* pequeño borde de fondo */
-  width: 45px;
-  height: 45px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 10px rgba(0,0,0,0.3);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 10;
 }
+
+.marker:hover {
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 15px rgba(0,0,0,0.5);
+  z-index: 50 !important;
+}
+
+/* Popup de Mapbox */
+.mapboxgl-popup {
+  z-index: 1000 !important;
+}
+
+.mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7) !important;
+}
+
+.mapboxgl-popup-tip {
+  z-index: 1001 !important;
+}
+
 .tarjeta-animal {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
@@ -313,34 +326,33 @@ body {
   text-align: center;
   font-family: sans-serif;
 }
+
 .tarjeta-animal h3 {
   margin: 0;
   font-size: 16px;
 }
+
 .tarjeta-animal p {
   margin: 5px 0 0;
   font-size: 13px;
 }
-/* NUEVA REGLA: Contenedor de la Imagen */
+
 .card-image-wrapper {
     width: 100%;
-    /* 🔑 Le damos el espacio de margen inferior al wrapper */
     margin-bottom: 10px;
-    /* 🔑 Esto controla que la imagen no se salga */
     overflow: hidden; 
 }
 
-/* NUEVA REGLA: Contenido de texto */
 #animal-card h2, 
 #animal-card p {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Y quizás un padding inferior al último párrafo */
 #animal-card p:last-child {
     padding-bottom: 15px;
 }
+
 .video-link {
   display: inline-block;
   margin-top: 8px;
@@ -377,7 +389,6 @@ body {
   overflow: hidden;
 }
 
-/* Bandas animadas */
 .loader .stripe {
   flex: 1;
   background: #111;
@@ -388,7 +399,11 @@ body {
   transform: translateY(100%);
 }
 
-/* Contenido central */
+.loader .stripe:nth-child(1) { transition-delay: 0.0s; }
+.loader .stripe:nth-child(2) { transition-delay: 0.08s; }
+.loader .stripe:nth-child(3) { transition-delay: 0.16s; }
+.loader .stripe:nth-child(4) { transition-delay: 0.24s; }
+
 .claim {
   position: absolute;
   top: 50%;
@@ -403,7 +418,7 @@ body {
 }
 
 .intro-content {
-  animation: fadeInUp 1.2s ease-out;
+  animation: fadeInUpLoader 1.2s ease-out;
 }
 
 .titulo {
@@ -439,15 +454,13 @@ body {
   background: #00ff99;
 }
 
-/* Escudo */
 .escudo {
   width: 140px;
   height: 140px;
   object-fit: contain;
-  animation: float 3s ease-in-out infinite;
+  animation: floatLoader 3s ease-in-out infinite;
 }
 
-/* Desvanecimiento */
 .fade-out {
   opacity: 0;
   transform: scale(1.1);
@@ -455,34 +468,47 @@ body {
   pointer-events: none;
 }
 
-/* Animaciones */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.loader .stripe {
-  flex: 1;
-  background: #111;
-  transition: transform 0.8s ease;
-}
-
-.loader.loaded .stripe {
-  transform: translateY(100%);
-}
-
-.loader .stripe:nth-child(1) { transition-delay: 0.0s; }
-.loader .stripe:nth-child(2) { transition-delay: 0.08s; }
-.loader .stripe:nth-child(3) { transition-delay: 0.16s; }
-.loader .stripe:nth-child(4) { transition-delay: 0.24s; }
-
 .loader.fade-out {
   opacity: 0;
   transform: scale(1.05);
   transition: opacity 1.5s ease, transform 1.5s ease;
   pointer-events: none;
+}
+
+@keyframes fadeInUpLoader {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatLoader {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Hero Planet */
+@media (max-width: 768px) {
+  .planet-name {
+    font-size: 3rem;
+    letter-spacing: 8px;
+  }
+  
+  .planet-text {
+    font-size: 0.9rem;
+  }
+  
+  .earth-image {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .planet-name {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+  }
+  
+  .explore-btn {
+    padding: 12px 35px;
+    font-size: 0.8rem;
+  }
 }
