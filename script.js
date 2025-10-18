@@ -407,20 +407,124 @@ locations.forEach((loc) => {
 
   const popupHTML = `
     <div style="
-      width: 220px;
-      border-radius: 12px;
+      width: 280px;
+      border-radius: 20px;
       overflow: hidden;
-      background: radial-gradient(circle at top, ${gradientColor} 0%, rgba(0,0,0,0.9) 80%);
+      background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
       color: white;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      box-shadow: 
+        inset 2px 2px 5px rgba(0,0,0,0.5),
+        inset -2px -2px 5px rgba(60,60,60,0.1),
+        0 10px 30px rgba(0,0,0,0.8);
       font-family: 'Poppins', sans-serif;
+      border: 2px solid;
+      border-image: linear-gradient(135deg, ${gradientColor.replace('0.3', '0.8')}, ${gradientColor.replace('0.3', '0.3')}) 1;
+      position: relative;
     ">
-      <img src="${loc.animal.image}" style="width:100%; height:120px; object-fit:cover; margin-bottom:6px;"/>
-      <h3 style="margin:4px 0 2px;">${loc.animal.common}</h3>
-      <p style="margin:0; font-size:0.85rem; font-style:italic;">${loc.animal.scientific}</p>
-      <p style="margin:6px 8px 8px; font-size:0.8rem;">${loc.animal.description}</p>
-      <a href="${loc.animal.video}" target="_blank" class="video-link">Ver video</a>
+      <!-- Imagen del animal -->
+      <div style="position: relative; overflow: hidden;">
+        <img src="${loc.animal.image}" style="
+          width: 100%; 
+          height: 180px; 
+          object-fit: cover;
+          filter: brightness(0.9) contrast(1.1);
+        "/>
+        <div style="
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 60px;
+          background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        "></div>
+      </div>
+
+      <!-- Contenido -->
+      <div style="padding: 15px 20px 20px; position: relative;">
+        <!-- Nombre común -->
+        <h3 style="
+          margin: 0 0 5px;
+          font-size: 1.4rem;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          background: linear-gradient(135deg, #ffffff, ${gradientColor.replace('0.3', '1')});
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        ">${loc.animal.common}</h3>
+
+        <!-- Nombre científico -->
+        <p style="
+          margin: 0 0 12px;
+          font-size: 0.85rem;
+          font-style: italic;
+          opacity: 0.7;
+          letter-spacing: 0.3px;
+        ">${loc.animal.scientific}</p>
+
+        <!-- Descripción -->
+        <p style="
+          margin: 0 0 15px;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          opacity: 0.85;
+        ">${loc.animal.description}</p>
+
+        <!-- Botón Ver Video (estilo switch) -->
+        <div style="
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        ">
+          <a href="${loc.animal.video}" target="_blank" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 2px solid ${gradientColor.replace('0.3', '0.6')};
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 
+              inset 2px 2px 4px rgba(0,0,0,0.3),
+              inset -2px -2px 4px rgba(60,60,60,0.1),
+              0 4px 10px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          " onmouseover="
+            this.style.transform='translateY(-2px)';
+            this.style.boxShadow='inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(60,60,60,0.1), 0 6px 15px rgba(0,0,0,0.6)';
+            this.style.borderColor='${gradientColor.replace('0.3', '1')}';
+          " onmouseout="
+            this.style.transform='translateY(0)';
+            this.style.boxShadow='inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(60,60,60,0.1), 0 4px 10px rgba(0,0,0,0.4)';
+            this.style.borderColor='${gradientColor.replace('0.3', '0.6')}';
+          ">
+            <span>▶</span>
+            <span>Ver video</span>
+          </a>
+        </div>
+
+        <!-- Glow LED effect en el borde -->
+        <div style="
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, ${gradientColor.replace('0.3', '0.4')}, transparent, ${gradientColor.replace('0.3', '0.4')});
+          pointer-events: none;
+          opacity: 0.5;
+          z-index: -1;
+          filter: blur(8px);
+        "></div>
+      </div>
     </div>
   `;
 
