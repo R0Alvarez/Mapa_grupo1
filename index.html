@@ -4,79 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animales del Fin del Mundo</title>
-
-  <!-- Vincula tu CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Librería Leaflet para el mapa -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-
   <!-- 🔸 Carátula de presentación con animación -->
-<div class="loader" id="intro">
-  <div class="stripe"></div>
-  <div class="stripe"></div>
-  <div class="stripe"></div>
-  <div class="stripe"></div>
-
-  <div class="claim">
-    <div class="intro-content">
-      <h1 class="titulo">Mapa Interactivo</h1>
-      <h2 class="subtitulo">Producción del Grupo 1</h2>
-      <p class="integrantes">
-        Aillon Huasebe, René Mateo<br>
-        Alvarez, René Alexander<br>
-        Arauz, María José<br>
-        Arteaga, Jesús Gabriel<br>
-        Condori, Cristal Saray<br>
-        López Valeriano, Eliana<br>
-        Mamani Crespo, Adriana
-      </p>
-      <button id="continuar-btn">Continuar</button>
+  <div class="loader" id="intro">
+    <div class="stripe"></div>
+    <div class="stripe"></div>
+    <div class="stripe"></div>
+    <div class="stripe"></div>
+    <div class="claim">
+      <div class="intro-content">
+        <h1 class="titulo">Mapa Interactivo</h1>
+        <h2 class="subtitulo">Producción del Grupo 1</h2>
+        <p class="integrantes">
+          Aillon Huasebe, René Mateo<br>
+          Alvarez, René Alexander<br>
+          Arauz, María José<br>
+          Arteaga, Jesús Gabriel<br>
+          Condori, Cristal Saray<br>
+          López Valeriano, Eliana<br>
+          Mamani Crespo, Adriana
+        </p>
+        <button id="continuar-btn">Continuar</button>
+      </div>
+      <img src="assets/images/escudo.png" alt="Escudo del colegio" class="escudo">
     </div>
-    <img src="assets/images/escudo.png" alt="Escudo del colegio" class="escudo">
   </div>
-</div>
 
-  <!-- 🌌 Sección principal con fondo y título -->
-  <section class="hero">
-    <h1 class="title">Animales del Fin del Mundo</h1>
-    <button id="scrollButton">Explorar</button>
-
+  <!-- 🌍 Nueva Hero Section estilo Planeta -->
+  <section class="hero-planet">
+    <div class="planet-bg">
+      <img src="assets/images/globo.png" alt="Planeta Tierra" class="earth-image">
+    </div>
+    <div class="hero-content">
+      <p class="planet-label">PLANETA</p>
+      <h1 class="planet-name">TIERRA</h1>
+      <p class="planet-text">
+        Nuestro hogar alberga millones de especies únicas. Explora el mapa 
+        interactivo y conoce a los animales en peligro que luchan por sobrevivir 
+        en un mundo cambiante.
+      </p>
+      <button class="explore-btn" id="scrollButton">EXPLORAR</button>
+    </div>
   </section>
 
- <!-- 🌍 Globo 3D -->
-<section id="map-section">
-  <div id="map"></div>
-  <button id="btn-spin">Pausar rotación</button>
-</section>
+  <!-- 🌍 Globo 3D -->
+  <section id="map-section">
+    <div id="map"></div>
+    <button id="btn-spin">Pausar rotación</button>
+  </section>
 
-<!-- 📜 Tarjeta flotante con info de animales -->
-<div id="animal-card" class="hidden">
-  <div class="card-image-wrapper"> ⬅️ NUEVO CONTENEDOR
-      <img id="animal-image" src="" alt="">
-  </div>
-  <h2 id="animal-common"></h2>
-  <p id="animal-scientific"></p>
-  <p id="animal-description"></p>
-</div>
-
-<!-- Scripts -->
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
-<script src="script.js"></script>
-
-  <!-- Script opcional: scroll suave al mapa -->
-  <script>
-  const scrollButton = document.getElementById("scrollButton");
-const mapSection = document.getElementById("map-section");
-
-scrollButton.addEventListener("click", () => {
-  mapSection.scrollIntoView({ behavior: "smooth" });
-});
-
-  </script>
-
+  <!-- Scripts -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+  <script src="script.js"></script>
 </body>
 </html>
