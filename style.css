@@ -5,7 +5,7 @@ body {
     color: #e2e8cf;
     overflow-x: hidden;
   }
-  
+
   #map {
     height: 100vh;
     width: 100%;
@@ -29,7 +29,7 @@ body {
     opacity: 0;
     pointer-events: none;
   }
-  
+
   #animal-card.visible {
     opacity: 1;
     pointer-events: auto;
@@ -58,7 +58,6 @@ body {
   overflow: hidden;
 }
 
-/* Fondo con imagen del planeta */
 .planet-bg {
   position: absolute;
   inset: 0;
@@ -76,7 +75,6 @@ body {
   animation: floatPlanet 6s ease-in-out infinite;
 }
 
-/* Contenido centrado */
 .hero-content {
   position: relative;
   z-index: 10;
@@ -159,7 +157,6 @@ body {
   height: 300px;
 }
 
-/* Animaciones para Hero Planet */
 @keyframes floatPlanet {
   0%, 100% { 
     transform: translateY(0px) scale(1); 
@@ -191,9 +188,38 @@ body {
   }
 }
 
-/* -------------------------
-  Fondo para la sección del mapa
-   ------------------------ */
+/* Responsive Hero Planet */
+@media (max-width: 768px) {
+  .planet-name {
+    font-size: 3rem;
+    letter-spacing: 8px;
+  }
+  
+  .planet-text {
+    font-size: 0.9rem;
+  }
+  
+  .earth-image {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .planet-name {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+  }
+  
+  .explore-btn {
+    padding: 12px 35px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ========================================
+   FIN HERO PLANET - RESTO DEL CSS ORIGINAL
+   ======================================== */
+
    #map-section {
     position: relative;
     min-height: 100vh;
@@ -252,7 +278,6 @@ body {
     -ms-interpolation-mode: nearest-neighbor;
   }
 
-/* 🌍 Estilos del globo 3D */
 #btn-spin {
   font: bold 13px/22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   background-color: transparent;
@@ -274,49 +299,17 @@ body {
   background-color: rgba(194, 255, 202, 0.15);
 }
 
-/* Asegurar visibilidad de marcadores */
-.mapboxgl-marker {
-  z-index: 10 !important;
-  pointer-events: auto !important;
-  transition: z-index 0s;
-}
-
 .marker {
   cursor: pointer;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50%;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 40px !important;
-  height: 40px !important;
-  box-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 10px rgba(0,0,0,0.3);
-  border: 3px solid rgba(255, 255, 255, 0.8);
-  transition: transform 0.2s ease;
-  position: relative;
-  z-index: 10;
-}
-
-.marker:hover {
-  transform: scale(1.2) !important;
-  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 15px rgba(0,0,0,0.5);
-  z-index: 50 !important;
-}
-
-/* Popup de Mapbox */
-.mapboxgl-popup {
-  z-index: 1000 !important;
-}
-
-.mapboxgl-popup-content {
-  padding: 0 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.7) !important;
-}
-
-.mapboxgl-popup-tip {
-  z-index: 1001 !important;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 .tarjeta-animal {
@@ -483,32 +476,4 @@ body {
 @keyframes floatLoader {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
-}
-
-/* Responsive Hero Planet */
-@media (max-width: 768px) {
-  .planet-name {
-    font-size: 3rem;
-    letter-spacing: 8px;
-  }
-  
-  .planet-text {
-    font-size: 0.9rem;
-  }
-  
-  .earth-image {
-    max-width: 500px;
-  }
-}
-
-@media (max-width: 480px) {
-  .planet-name {
-    font-size: 2.5rem;
-    letter-spacing: 5px;
-  }
-  
-  .explore-btn {
-    padding: 12px 35px;
-    font-size: 0.8rem;
-  }
 }
